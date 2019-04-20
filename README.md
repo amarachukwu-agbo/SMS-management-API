@@ -1,4 +1,5 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6cc8f5a8a14f6e3439fe/maintainability)](https://codeclimate.com/github/amarachukwu-agbo/SMS-management-API/maintainability)
 
 # SMS-management-API
 An API that manages SMS sending and reception
