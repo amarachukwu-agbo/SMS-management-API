@@ -7,19 +7,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     read: {
       allowNull: false,
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {});
   Message.associate = function(models) {
     Message.belongsTo(models.User, {
       as: 'sender',
       foreignKey: 'senderId',
-      onDelete: 'CASCADE'
     });
     Message.belongsTo(models.User, {
       as: 'recipient',
       foreignKey: 'recipientId',
-      onDelete: 'CASCADE'
     });
   };
   return Message;
