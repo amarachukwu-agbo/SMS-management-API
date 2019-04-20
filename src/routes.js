@@ -7,7 +7,8 @@ import {
   validateResult,
   validateMessageParams,
   validateMessageBody,
-  checkUserExists
+  checkUserExists,
+  validateMessageUsers
 } from './middlewares/validator';
 
 const router = express.Router();
@@ -39,6 +40,7 @@ router.post(
   '/messages',
   validateMessageBody,
   validateResult,
+  validateMessageUsers,
   Message.createMessage
 );
 router.get(

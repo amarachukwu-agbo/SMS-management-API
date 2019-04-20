@@ -20,7 +20,7 @@ class Message {
       }
       const createdMessage = await models.Message.create(req.body);
       return res.status(201).json({
-        message: 'User created successfully',
+        message: 'Message created successfully',
         createdMessage
       });
     } catch (error) {
@@ -34,7 +34,7 @@ class Message {
   static async getMessages(req, res) {
     const { userId } = req.params;
     try {
-     const messages = await models.Message.findAll({
+      const messages = await models.Message.findAll({
         where: {
           [Op.or]: [{ recipientId: userId }, { senderId: userId }]
         },

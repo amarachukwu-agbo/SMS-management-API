@@ -1,4 +1,5 @@
 import { param, body, validationResult } from 'express-validator/check';
+import { Op } from 'sequelize';
 import models from '../../models';
 
 export const validateUserId = [
@@ -50,7 +51,32 @@ export const checkUserExists = async (req, res, next) => {
   const user = await models.User.findByPk(userId);
   if (!user) {
     return res.status(404).json({
+      message: 'Error getting user messages',
       error: 'User does not exist',
+    });
+  }
+  next();
+}
+
+export const validateMessageUsers = async (req, res, next) => {
+  const { senderId, recipientId } = req.body;
+  if (senderId === recipientId) {
+    return res.status(400).json({
+      error: 'Error sending sms',
+      message: 'Sender and recipient cannot be the same'
+    });
+  }
+  const users = await models.User.findAll({
+    where: {
+      id: {
+        [Op.in]: [senderId, recipientId]
+      }
+    }
+  });
+  if (users.length < 2) {
+    return res.status(404).json({
+      error: 'Error sending sms',
+      message: 'Sender and/or recipient does not exist '
     });
   }
   next();
