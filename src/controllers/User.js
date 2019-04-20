@@ -1,10 +1,9 @@
-let a;
 import models from '../../models';
 import { Op } from 'sequelize';
 
 class User {
   static async createUser(req, res) {
-    const { user: { name, phoneNumber } } = req.body;
+    const { name, phoneNumber } = req.body;
     try {
       const existingUser = await models.User.findOne({
         where: {
@@ -20,7 +19,7 @@ class User {
           error: 'User with this name or phone number already exists',
         });
       }
-      const user = await models.User.create(req.body.user);
+      const user = await models.User.create(req.body);
       return res.status(201).json({
         message: 'User created successfully',
         user

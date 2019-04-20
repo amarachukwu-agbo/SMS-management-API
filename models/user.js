@@ -13,11 +13,15 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Message, {
       as: 'sender',
-      foreignKey: 'senderId'
+      foreignKey: 'senderId',
+      onDelete: 'cascade',
+      hooks: true
     });
     User.hasMany(models.Message, {
       as: 'recipient',
-      foreignKey: 'recipientId'
+      foreignKey: 'recipientId',
+      onDelete: 'cascade',
+      hooks: true
     });
   };
   return User;
